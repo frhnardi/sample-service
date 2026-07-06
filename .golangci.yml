@@ -1,0 +1,27 @@
+# golangci-lint configuration (schema v2 — installed by golangci-lint-action@v9,
+# which the golden path pins). The default linters (errcheck, govet, ineffassign,
+# staticcheck, unused) stay enabled; below we add the ones that matter most for a
+# security-first service.
+version: "2"
+
+linters:
+  enable:
+    - errorlint  # catches wrong error comparisons/wrapping (errors.Is/As)
+    - gosec      # common security mistakes — this is a security platform
+    - revive     # fast, configurable style checks (golint successor)
+    - misspell   # typos in comments and strings
+    - bodyclose  # HTTP response bodies must be closed
+    - noctx      # HTTP requests should carry a context
+  exclusions:
+    generated: lax
+    rules:
+      # Test files may use httptest inputs that gosec reads as tainted; the
+      # findings are noise in unit tests.
+      - path: _test\.go
+        linters:
+          - gosec
+
+formatters:
+  enable:
+    - gofmt
+    - goimports

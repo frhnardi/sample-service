@@ -1,0 +1,9 @@
+# Keep the build context minimal — smaller context, faster builds, and nothing
+# stray ending up in an image layer.
+.git
+.github
+*_test.go
+README.md
+.golangci.yml
+Dockerfile
+.dockerignore
