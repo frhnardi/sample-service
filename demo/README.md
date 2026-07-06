@@ -71,6 +71,32 @@ returns), `NAMESPACE` (defaults to `apps`), `ROLLOUT_TIMEOUT` (defaults to
   with it.
 - The local `:rogue` docker tag is removed.
 
+## metrics.sh — numbers for the write-up
+
+```bash
+./metrics.sh > post.md   # stdout is pure markdown; progress goes to stderr
+```
+
+For the **latest successful** golden-path run on `main` (resolved via the API
+— no hardcoded run IDs), it measures and prints a pasteable markdown summary:
+
+1. **Lead time** — commit timestamp → pod Ready in AKS. The link between the
+   two is the image digest: the script reads the digest pinned in
+   `platform-gitops/apps/sample-service/kustomization.yaml` on `main` and
+   finds the earliest Ready pod actually running it. If that pod predates the
+   run (promotion PR not merged yet), it refuses to print a nonsense number.
+2. **Pipeline stage durations** — one table row per job of the run.
+3. **Security-control count** — parsed from the run's job names against a
+   keyword map (SAST, SCA, image scan, SBOM attestation, keyless signing,
+   digest-pinned promotion); the bullets are printed with the count so the
+   number stays auditable.
+
+Dependencies: `gh` (authenticated), `kubectl` (pointed at the cluster), `jq`
+— nothing else; timestamp math happens in jq, not GNU date. Same knobs as
+above plus `SERVICE_REPO`, `GITOPS_REPO`, `WORKFLOW`, `BRANCH`. The
+run-end → pod-Ready leg legitimately includes the human review+merge of the
+digest-bump PR — the summary footnotes it rather than hiding it.
+
 ## Denial-path note
 
 Kyverno's policies match `Pod` resources; with rule auto-generation the block
