@@ -9,7 +9,7 @@ permissions:
 jobs:
   golden-path:
     # TODO: pin to platform-golden-path's main SHA once the repo is on GitHub.
-    uses: frhnardi/platform-golden-path/.github/workflows/golden-path.yml@4999959
+    uses: frhnardi/platform-golden-path/.github/workflows/golden-path.yml@main
     with:
       service-name: sample-service
     secrets: inherit
