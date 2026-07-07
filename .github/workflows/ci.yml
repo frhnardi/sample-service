@@ -13,4 +13,4 @@ jobs:
     uses: frhnardi/platform-golden-path/.github/workflows/golden-path.yml@main
     with:
       service-name: sample-service
-    secrets: inherit
+    secrets: inherit  # nosemgrep: secrets-inherit — sanctioned ADR-0003 exception for GitOps App key forwarding
