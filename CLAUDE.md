@@ -9,7 +9,7 @@ This repo is also the **test harness** for the platform. When the golden path or
 ## Constraints
 
 - Keep the application trivial (one `/healthz`, one `/hello` endpoint). Every line of business logic added here dilutes the demo. Resist making it interesting.
-- The CI file must stay ~5 lines of `uses: <org>/platform-golden-path/.github/workflows/golden-path.yml@<sha>` plus inputs. If more YAML creeps in here, that is a smell that the golden path is leaking complexity onto developers — fix it upstream instead.
+- The CI file must stay ~5 lines of `uses: frhnardi/platform-golden-path/.github/workflows/golden-path.yml@<sha>` plus inputs. If more YAML creeps in here, that is a smell that the golden path is leaking complexity onto developers — fix it upstream instead.
 - No Kubernetes manifests here. Deployment lives in `platform-gitops` (updated automatically by the pipeline via digest-bump PR).
 - For the Phase 5 demo, this repo gets one intentional "attack" branch: build an image locally, push it to ACR manually (unsigned), attempt to deploy — record the Kyverno rejection. Keep that script in `demo/`.
 

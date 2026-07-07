@@ -8,7 +8,7 @@ This repo is instantiated from the template ("Use this template" on platform-gol
 
 ```
 Read CLAUDE.md first. This repo was instantiated from the service-go template. Verify:
-1. ci.yml references <ORG>/platform-golden-path/.github/workflows/golden-path.yml pinned to the current main SHA — update the SHA if stale.
+1. ci.yml references frhnardi/platform-golden-path/.github/workflows/golden-path.yml pinned to the current main SHA — update the SHA if stale.
 2. The caller workflow is under 15 lines. If anything beyond checkout+uses+inputs exists, list it as upstream leakage; do not fix it here.
 3. go test passes, docker build succeeds locally.
 Then rename the service identity to "sample-service" everywhere (module name, image name input).
