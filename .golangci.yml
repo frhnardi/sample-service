@@ -15,11 +15,13 @@ linters:
   exclusions:
     generated: lax
     rules:
-      # Test files may use httptest inputs that gosec reads as tainted; the
-      # findings are noise in unit tests.
+      # Test files use httptest inputs that gosec reads as tainted, and
+      # httptest.NewRequest — the idiomatic way to build a test request — trips
+      # noctx. Both are noise in unit tests, not real findings.
       - path: _test\.go
         linters:
           - gosec
+          - noctx
 
 formatters:
   enable:
