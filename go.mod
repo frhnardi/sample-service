@@ -2,4 +2,4 @@
 // go-version-file: go.mod), so keep it accurate.
 module github.com/frhnardi/sample-service
 
-go 1.22
+go 1.24

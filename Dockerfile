@@ -9,7 +9,7 @@
 # reusable workflow; keeping the runtime tiny keeps that surface tiny.
 
 # ── Build stage ──────────────────────────────────────────────────────────────
-FROM golang:1.22-bookworm AS build
+FROM golang:1.24-bookworm AS build
 
 WORKDIR /src
 
